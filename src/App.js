@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import "./App.css";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import Home from "./screens/home/Home";
+import Game from "./screens/game/Game";
+import { useAuth } from "./context/AuthContext";
+import Login from "./screens/login/Login";
+
+import axios from "axios";
+import PrivateRoute from "./components/private-routes/PrivateRoute";
+import Signup from "./screens/login/Signup";
+axios.defaults.withCredentials = true;
 
 function App() {
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    return () => {};
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path="/" element={<PrivateRoute />}>
+          <Route exact path="" element={<Home />} />
+        </Route>
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<Signup />} />
+        <Route path="/game" element={<PrivateRoute />}>
+          <Route exact path="" element={<Game />} />
+        </Route>
+      </Routes>
     </div>
   );
 }
