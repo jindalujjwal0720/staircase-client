@@ -14,6 +14,33 @@ import { useAuth } from "../../context/AuthContext";
 import { LoadingIcon } from "../loading/Loading";
 import RewardDialogBox from "../reward-dialogbox/RewardDialogBox";
 
+import imageA from "../../assets/images/a.png";
+import imageB from "../../assets/images/b.png";
+import imageC from "../../assets/images/c.png";
+import imageD from "../../assets/images/d.png";
+import imageE from "../../assets/images/e.png";
+import imageF from "../../assets/images/f.png";
+import imageG from "../../assets/images/g.png";
+import imageH from "../../assets/images/h.png";
+import imageI from "../../assets/images/i.png";
+import imageJ from "../../assets/images/j.png";
+import imageK from "../../assets/images/k.png";
+import imageL from "../../assets/images/l.png";
+import imageM from "../../assets/images/m.png";
+import imageN from "../../assets/images/n.png";
+import imageO from "../../assets/images/o.png";
+import imageP from "../../assets/images/p.png";
+import imageQ from "../../assets/images/q.png";
+import imageR from "../../assets/images/r.png";
+import imageS from "../../assets/images/s.png";
+import imageT from "../../assets/images/t.png";
+import imageU from "../../assets/images/u.png";
+import imageV from "../../assets/images/v.png";
+import imageW from "../../assets/images/w.png";
+import imageX from "../../assets/images/x.png";
+import imageY from "../../assets/images/y.png";
+import imageZ from "../../assets/images/z.png";
+
 const AchievementsDialogBox = ({ onClose }) => {
   const [loading, setLoading] = useState(false);
   const { currentUser, updateCurrentUser } = useAuth();
@@ -95,6 +122,43 @@ const AchievementsDialogBox = ({ onClose }) => {
     });
   };
 
+  const getCollectibleImage = (value) => {
+    if (value === "a") return imageA;
+    else if (value === "b") return imageB;
+    else if (value === "c") return imageC;
+    else if (value === "d") return imageD;
+    else if (value === "e") return imageE;
+    else if (value === "f") return imageF;
+    else if (value === "g") return imageG;
+    else if (value === "h") return imageH;
+    else if (value === "i") return imageI;
+    else if (value === "j") return imageJ;
+    else if (value === "k") return imageK;
+    else if (value === "l") return imageL;
+    else if (value === "m") return imageM;
+    else if (value === "n") return imageN;
+    else if (value === "o") return imageO;
+    else if (value === "p") return imageP;
+    else if (value === "q") return imageQ;
+    else if (value === "r") return imageR;
+    else if (value === "s") return imageS;
+    else if (value === "t") return imageT;
+    else if (value === "u") return imageU;
+    else if (value === "v") return imageV;
+    else if (value === "w") return imageW;
+    else if (value === "x") return imageX;
+    else if (value === "y") return imageY;
+    else if (value === "z") return imageZ;
+    return imageA;
+  };
+
+  const getFrequencyClass = (frequency) => {
+    if (frequency === 1) return styles.epic;
+    else if (frequency === 2) return styles.rare;
+    else if (frequency === 3) return styles.common;
+    return styles.common;
+  };
+
   useEffect(() => {
     fetchAchievements();
   }, []);
@@ -105,7 +169,7 @@ const AchievementsDialogBox = ({ onClose }) => {
         <RewardDialogBox
           onClose={() => setShowReward(false)}
           reward={reward.rewards}
-          chestImage={getImage(reward.chestImage)}
+          chestImage={getImage(reward.rewards.chestImage)}
         />
       )}
       <div className={styles.pseudoHeader}>
@@ -124,7 +188,7 @@ const AchievementsDialogBox = ({ onClose }) => {
               >
                 <img
                   className={styles.rewardImage}
-                  src={getImage(reward.chestImage)}
+                  src={getImage(reward.rewards.chestImage)}
                   alt="rewards"
                 />
               </div>
@@ -134,6 +198,28 @@ const AchievementsDialogBox = ({ onClose }) => {
           <div className={styles.noRewardsText}>You have no rewards left!</div>
         )}
       </div>
+      {currentUser.collectibles.length > 0 && (
+        <div className={styles.rewardsScrollingContainer}>
+          {currentUser.collectibles.map((collectible, index) => {
+            return (
+              <div
+                className={
+                  styles.rewardSquareCollectible +
+                  " " +
+                  getFrequencyClass(collectible.frequency)
+                }
+                key={index}
+              >
+                <img
+                  className={styles.rewardImageCollectible}
+                  src={getCollectibleImage(collectible.value)}
+                  alt="collectible"
+                />
+              </div>
+            );
+          })}
+        </div>
+      )}
       <div className={styles.layout}>
         <div className={styles.closeButton}>
           <CandyButton

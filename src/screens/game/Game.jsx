@@ -138,6 +138,9 @@ const Game = () => {
           setActive(-1);
           setHint("");
           setHintError("");
+          setHintsUsed(0);
+          setPenalties(0);
+          setMoves(0);
         }
       );
       return;
@@ -285,7 +288,7 @@ const Game = () => {
               src={hintImage}
               alt="hint"
             ></img>
-            {hints - userGamesCommons.hintsUsed}
+            {Math.max(0, hints - userGamesCommons.hintsUsed)}
           </div>
         </div>
       </div>

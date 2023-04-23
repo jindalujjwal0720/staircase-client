@@ -12,6 +12,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   async function signup(user) {
+    setLoading(true);
     try {
       const response = await axios.post(
         process.env.REACT_APP_API_BASE_URL + "/auth/register",
@@ -27,9 +28,11 @@ const AuthProvider = ({ children }) => {
       // handle error
       console.log(error);
     }
+    setLoading(false);
   }
 
   async function login(user) {
+    setLoading(true);
     try {
       const response = await axios.post(
         process.env.REACT_APP_API_BASE_URL + "/auth/login",
@@ -39,14 +42,15 @@ const AuthProvider = ({ children }) => {
         }
       );
       setCurrentUser(response.data.user);
-      setLoading(false);
     } catch (error) {
       // handle error
       console.log(error);
     }
+    setLoading(false);
   }
 
   async function logout() {
+    setLoading(true);
     try {
       await axios.get(process.env.REACT_APP_API_BASE_URL + "/auth/logout");
       setCurrentUser(null);
@@ -55,6 +59,7 @@ const AuthProvider = ({ children }) => {
       // handle error
       console.log(error);
     }
+    setLoading(false);
   }
 
   async function updateCurrentUser() {
@@ -72,6 +77,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (!currentUser) {
+      setLoading(true);
       const fetchUser = async () => {
         try {
           const response = await axios.get(
@@ -87,9 +93,6 @@ const AuthProvider = ({ children }) => {
       setLoading(false);
     }
   }, []);
-
-  useEffect(() => {
-  }, [currentUser]);
 
   const value = {
     loading,

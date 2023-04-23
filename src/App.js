@@ -9,10 +9,11 @@ import Login from "./screens/login/Login";
 import axios from "axios";
 import PrivateRoute from "./components/private-routes/PrivateRoute";
 import Signup from "./screens/login/Signup";
+import Loading from "./components/loading/Loading";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const { currentUser } = useAuth();
+  const { loading } = useAuth();
 
   useEffect(() => {
     return () => {};
@@ -20,16 +21,20 @@ function App() {
 
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<PrivateRoute />}>
-          <Route exact path="" element={<Home />} />
-        </Route>
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/signup" element={<Signup />} />
-        <Route path="/game" element={<PrivateRoute />}>
-          <Route exact path="" element={<Game />} />
-        </Route>
-      </Routes>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Routes>
+          <Route path="/" element={<PrivateRoute />}>
+            <Route exact path="" element={<Home />} />
+          </Route>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+          <Route path="/game" element={<PrivateRoute />}>
+            <Route exact path="" element={<Game />} />
+          </Route>
+        </Routes>
+      )}
     </div>
   );
 }

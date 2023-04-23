@@ -119,6 +119,12 @@
     drop-shadow(0 0 1rem gold) drop-shadow(0 0 1.5rem gold) grayscale(100%);
 }
 
+.rewardImageCollectible {
+  max-width: 2.7rem;
+  max-height: 2.7rem;
+  filter: drop-shadow(0 0 0.5rem #ffffffcb);
+}
+
 .progressBar {
   display: flex;
   flex-direction: column;
@@ -188,6 +194,18 @@
   margin-bottom: 0.3rem;
 }
 
+.rewardSquareCollectible {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+  background-color: #f0b26f;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+  margin-bottom: 0.3rem;
+}
+
 .rewardImageUnused {
   max-width: 3.5rem;
   max-height: 3.5rem;
@@ -214,4 +232,18 @@
   letter-spacing: 0.09rem;
   color: #6a4206;
   margin: 1rem 0;
+}
+
+.rare {
+  border: 0.15rem solid #9c73eb;
+  position: relative;
+}
+
+.epic {
+  border: 0.15rem solid #00c486;
+  position: relative;
+}
+
+.common {
+  border: 0.1rem solid #8a5d1981;
 }

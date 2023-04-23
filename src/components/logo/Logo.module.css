@@ -8,8 +8,8 @@
 }
 
 .letter {
-  width: 2.6rem;
-  height: 2.6rem;
+  width: 2.4rem;
+  height: 2.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,4 +57,8 @@
 
 .logo div:nth-of-type(9) {
   transform: rotate(-10deg);
+}
+
+.logo div:nth-of-type(10) {
+  transform: rotate(12deg);
 }

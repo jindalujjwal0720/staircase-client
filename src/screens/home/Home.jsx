@@ -15,12 +15,14 @@ import badge4 from "../../assets/images/badge4.png";
 import badge5 from "../../assets/images/badge5.png";
 import badge6 from "../../assets/images/badge6.png";
 import { useAuth } from "./../../context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import StoreDialogBox from "../../components/store-dialogbox/StoreDialogBox";
 import { useGame } from "../../context/GameContext";
 import LeaderboardDialogBox from "../../components/leaderboard-dialogbox/LeaderboardDialogBox";
 import GameCompleteDialogBox from "../../components/game-complete-dialogbox/GameCompleteDialogBox";
 import AchievementsDialogBox from "../../components/achievements-dialogbox/AchievementsDialogBox";
+import RewardDialogBox from "../../components/reward-dialogbox/RewardDialogBox";
+import HowToPlayDialogBox from "../../components/how-to-play-dialogbox/HowToPlayDialogBox";
 
 const Home = () => {
   const { currentUser, updateCurrentUser } = useAuth();
@@ -33,6 +35,7 @@ const Home = () => {
   const [showStore, setShowStore] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
+  const [showHowToPlay, setShowHowToPlay] = useState(false);
 
   const getXPBadge = () => {
     if (currentLevel <= 3) return badge1;
@@ -60,6 +63,9 @@ const Home = () => {
 
   return (
     <div className={styles.layout}>
+      {showHowToPlay && (
+        <HowToPlayDialogBox onClose={() => setShowHowToPlay(false)} />
+      )}
       {showStore && <StoreDialogBox onClose={() => setShowStore(false)} />}
       {showAchievements && (
         <AchievementsDialogBox onClose={() => setShowAchievements(false)} />
@@ -91,7 +97,7 @@ const Home = () => {
           </div>
           <div className={styles.coins}>
             <img className={styles.coinImage} src={hint} alt="hint"></img>
-            {hints - userGamesCommons.hintsUsed}
+            {Math.max(0, hints - userGamesCommons.hintsUsed)}
           </div>
         </div>
       </div>
@@ -99,6 +105,12 @@ const Home = () => {
         <Logo />
       </div>
       <div className={styles.middle}>
+        <div
+          className={styles.howToPlayToggleButton}
+          onClick={() => setShowHowToPlay(true)}
+        >
+          ?
+        </div>
         <div className={styles.levelsContainer}>
           <Link
             to="/game"

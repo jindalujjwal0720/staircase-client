@@ -11,6 +11,7 @@ import hint4 from "./../../assets/images/hint4.png";
 import { ImCross } from "react-icons/im";
 import { useAuth } from "../../context/AuthContext";
 import { useGame } from "../../context/GameContext";
+import { LoadingIcon } from "../loading/Loading";
 
 const StoreDialogBox = ({ onClose }) => {
   const { currentUser, updateCurrentUser } = useAuth();
@@ -90,7 +91,9 @@ const StoreDialogBox = ({ onClose }) => {
           </div>
         </div>
         {message != "" && <div className={styles.message}>{message}</div>}
-        {!loading &&
+        {loading ? (
+          <LoadingIcon />
+        ) : (
           storeItems &&
           storeItems.map((item, index) => {
             return (
@@ -137,7 +140,8 @@ const StoreDialogBox = ({ onClose }) => {
                 </div>
               </div>
             );
-          })}
+          })
+        )}
       </div>
     </BaseDialogBox>
   );

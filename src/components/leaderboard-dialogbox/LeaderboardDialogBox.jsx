@@ -61,9 +61,7 @@ const LeaderboardDialogBox = ({ onClose }) => {
           </CandyButton>
         </div>
         {loading ? (
-          <div className={styles.loadingWrapper}>
-            <LoadingIcon />
-          </div>
+          <LoadingIcon />
         ) : (
           users &&
           users.map((user, index) => {
