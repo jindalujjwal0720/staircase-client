@@ -36,7 +36,7 @@ const GameCompleteDialogBox = ({ onPlayAgain, gameChanges }) => {
         </div>
         <div className={styles.heading}>REWARDS</div>
         <div className={styles.tile}>
-          { (
+          {
             <div className={styles.tileReward}>
               <div className={styles.tileRewardText}>COINS</div>
               <img
@@ -48,8 +48,8 @@ const GameCompleteDialogBox = ({ onPlayAgain, gameChanges }) => {
                 {gameChanges.coinsInc}
               </div>
             </div>
-          )}
-          { (
+          }
+          {
             <div className={styles.tileReward}>
               <div className={styles.tileRewardText}>XP</div>
               <img
@@ -59,7 +59,7 @@ const GameCompleteDialogBox = ({ onPlayAgain, gameChanges }) => {
               ></img>
               <div className={styles.tileRewardText}>{gameChanges.xpInc}</div>
             </div>
-          )}
+          }
         </div>
         {gameChanges.isLevelUp ? (
           <div className={styles.levelUp}>

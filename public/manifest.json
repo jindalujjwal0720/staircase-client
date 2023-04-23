@@ -5,16 +5,17 @@
     {
       "src": "logo.svg",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
-      "src": "logo.svg",
-      "type": "image/svg+xml",
+      "src": "logo192.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo.svg",
-      "type": "image/svg+xml",
+      "src": "logo512.png",
+      "type": "image/png",
       "sizes": "512x512"
     }
   ],
@@ -22,5 +23,6 @@
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffae38",
-  "scope": "/"
+  "scope": ".",
+  "description": "Alphastair is a word game where you have to make target words from given starting words. The longer the word, the more points you get."
 }
