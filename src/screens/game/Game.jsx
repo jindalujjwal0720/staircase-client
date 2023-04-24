@@ -81,11 +81,11 @@ const Game = () => {
       setStartWord(pair.start);
       setInputWord(pair.start);
       setEndWord(pair.end);
-      setLoading(false);
     } catch (error) {
       // handle error
       console.log(error);
     }
+    setLoading(false);
   };
 
   const computeChangedIndexes = (word1, word2) => {
@@ -128,6 +128,7 @@ const Game = () => {
       return;
     } else if (inputWord === endWord) {
       // game completed
+      setLoading(true);
       localStorage.removeItem("userGame" + difficulty);
       submitUserGame(startWord, endWord, moves + 1, penalties, hintsUsed).then(
         (results) => {
@@ -143,6 +144,7 @@ const Game = () => {
           setMoves(0);
         }
       );
+      setLoading(false);
       return;
     }
     setPreviousWord(inputWord);
@@ -157,13 +159,13 @@ const Game = () => {
     if (hint !== "") return;
     if (previousWord === endWord || inputWord === endWord) return;
     if (hints - hintsUsed <= 0) {
-      setHintError(
-        "You don't have Hint Bulbs remaining, buy more from the store."
-      );
+      setHintError("You don't have Hints remaining, buy more from the store.");
     } else {
+      setLoading(true);
       const data = await getHint(difficulty, previousWord, endWord);
       setHint(data.hint);
       setHintsUsed((h) => h + 1);
+      setLoading(false);
     }
   };
 

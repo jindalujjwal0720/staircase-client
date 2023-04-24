@@ -4,16 +4,24 @@ import homeStyles from "../home/Home.module.css";
 import Logo from "../../components/logo/Logo";
 import CandyButton from "../../components/buttons/candybutton/CandyButton";
 import { useAuth } from "../../context/AuthContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Snackbar from "../../components/snackbar/Snackbar";
+import Loading from "../../components/loading/Loading";
 
 const Signup = () => {
+  const location = useLocation();
+  console.log(location);
+  const query = new URLSearchParams(location.search);
+  const referralCode = query.get("ref");
+  console.log(query.get("ref"));
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { signup, currentUser, setCurrentUser } = useAuth();
+  const { signup, currentUser } = useAuth();
+  const [errorSnackbarMessage, setErrorSnackbarMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,11 +39,15 @@ const Signup = () => {
         name: nameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
+        referralCode: referralCode,
       });
       navigate("/");
     } catch (error) {
       // handle error
-      console.log(error);
+      setErrorSnackbarMessage(error.message);
+      setTimeout(() => {
+        setErrorSnackbarMessage("");
+      }, 2000);
     }
     setLoading(false);
   };
@@ -61,6 +73,10 @@ const Signup = () => {
 
   return (
     <div className={styles.layout}>
+      {loading && <Loading />}
+      {errorSnackbarMessage !== "" && (
+        <Snackbar duration={2000}>{errorSnackbarMessage}</Snackbar>
+      )}
       <div className={styles.logoArea}>
         <Logo />
       </div>

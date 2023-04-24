@@ -6,8 +6,6 @@ import CandyButton from "../../components/buttons/candybutton/CandyButton";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
-import LeaderboardDialogBox from "../../components/leaderboard-dialogbox/LeaderboardDialogBox";
-import AchievementsDialogBox from "../../components/achievements-dialogbox/AchievementsDialogBox";
 
 const Login = () => {
   const emailRef = useRef();
@@ -35,7 +33,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       // handle error
-      console.log(error);
+      console.log(error.message);
     }
     setLoading(false);
   };
@@ -57,6 +55,7 @@ const Login = () => {
 
   return (
     <div className={styles.layout}>
+      {loading && <Loading />}
       <div className={styles.logoArea}>
         <Logo />
       </div>

@@ -32,7 +32,7 @@ const StoreDialogBox = ({ onClose }) => {
     return () => {};
   }, []);
 
-  const doTransaction = (item) => {
+  const doTransaction = async (item) => {
     if (loading) return;
     if (item.type === "ad") {
       setMessage("No ads available");
@@ -40,7 +40,7 @@ const StoreDialogBox = ({ onClose }) => {
     }
     setLoading(true);
     if (currentUser.coins >= item.cost.coins) {
-      makeTransaction(item.id);
+      await makeTransaction(item.id);
       updateCurrentUser();
       setMessage("Transaction successful");
     } else {
