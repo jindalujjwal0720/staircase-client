@@ -57,6 +57,22 @@
   cursor: pointer;
 }
 
+.shareToggleButton {
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  background-color: #ffc44e;
+  box-shadow: 0 0.1rem 0 #65410a;
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.8rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #523305;
+  cursor: pointer;
+}
+
 .levelsContainer {
   display: flex;
   flex-direction: column;

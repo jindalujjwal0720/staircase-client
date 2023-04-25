@@ -7,7 +7,7 @@ import bolt from "../../assets/images/bolt-blue.png";
 import { MdLeaderboard } from "react-icons/md";
 import { HiLockClosed } from "react-icons/hi";
 import { IoStorefront } from "react-icons/io5";
-import { FaTrophy } from "react-icons/fa";
+import { FaShareAlt, FaTrophy } from "react-icons/fa";
 import badge1 from "../../assets/images/badge1.png";
 import badge2 from "../../assets/images/badge2.png";
 import badge3 from "../../assets/images/badge3.png";
@@ -23,6 +23,7 @@ import GameCompleteDialogBox from "../../components/game-complete-dialogbox/Game
 import AchievementsDialogBox from "../../components/achievements-dialogbox/AchievementsDialogBox";
 import RewardDialogBox from "../../components/reward-dialogbox/RewardDialogBox";
 import HowToPlayDialogBox from "../../components/how-to-play-dialogbox/HowToPlayDialogBox";
+import ReferralsDialogbox from "../../components/referrals-dialogbox/ReferralsDialogbox";
 
 const Home = () => {
   const { currentUser, updateCurrentUser } = useAuth();
@@ -36,6 +37,7 @@ const Home = () => {
   const [showAchievements, setShowAchievements] = useState(false);
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showHowToPlay, setShowHowToPlay] = useState(false);
+  const [showReferrals, setShowReferrals] = useState(false);
 
   const getXPBadge = () => {
     if (currentLevel <= 3) return badge1;
@@ -63,6 +65,9 @@ const Home = () => {
 
   return (
     <div className={styles.layout}>
+      {showReferrals && (
+        <ReferralsDialogbox onClose={() => setShowReferrals(false)} />
+      )}
       {showHowToPlay && (
         <HowToPlayDialogBox onClose={() => setShowHowToPlay(false)} />
       )}
@@ -110,6 +115,12 @@ const Home = () => {
           onClick={() => setShowHowToPlay(true)}
         >
           ?
+        </div>
+        <div
+          className={styles.shareToggleButton}
+          onClick={() => setShowReferrals(true)}
+        >
+          <FaShareAlt />
         </div>
         <div className={styles.levelsContainer}>
           <Link

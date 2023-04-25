@@ -10,10 +10,8 @@ import Loading from "../../components/loading/Loading";
 
 const Signup = () => {
   const location = useLocation();
-  console.log(location);
   const query = new URLSearchParams(location.search);
   const referralCode = query.get("ref");
-  console.log(query.get("ref"));
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();

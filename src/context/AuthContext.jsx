@@ -20,6 +20,7 @@ const AuthProvider = ({ children }) => {
           email: user.email,
           password: user.password,
           name: user.name,
+          referralCode: user.referralCode,
         }
       );
       setCurrentUser(response.data.user);
@@ -77,7 +78,6 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (!currentUser) {
-      setLoading(true);
       const fetchUser = async () => {
         try {
           const response = await axios.get(
@@ -90,8 +90,9 @@ const AuthProvider = ({ children }) => {
         }
       };
       fetchUser();
-      setLoading(false);
     }
+    setLoading(false);
+    return () => {};
   }, []);
 
   const value = {

@@ -12,7 +12,12 @@ const Login = () => {
   const passwordRef = useRef();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login, currentUser, setCurrentUser } = useAuth();
+  const {
+    login,
+    currentUser,
+    setCurrentUser,
+    loading: currentUserLoading,
+  } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,7 +60,7 @@ const Login = () => {
 
   return (
     <div className={styles.layout}>
-      {loading && <Loading />}
+      {(loading || currentUserLoading) && <Loading />}
       <div className={styles.logoArea}>
         <Logo />
       </div>
