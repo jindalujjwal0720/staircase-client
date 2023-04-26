@@ -6,6 +6,7 @@ import CandyButton from "../../components/buttons/candybutton/CandyButton";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
+import ServerErrorDialogbox from "../../components/server-errors-dialogbox/ServerErrorDialogbox";
 
 const Login = () => {
   const emailRef = useRef();
@@ -39,9 +40,8 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       // handle error
-      console.log(error.message);
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const emailRegex = new RegExp(
@@ -61,47 +61,52 @@ const Login = () => {
 
   return (
     <div className={styles.layout}>
-      {(loading || currentUserLoading) && <Loading />}
-      <div className={styles.logoArea}>
-        <Logo />
-      </div>
-      <div className={styles.middle}>
-        <div className={styles.inputsContainer}>
-          <input
-            ref={emailRef}
-            className={styles.input}
-            placeholder="Email"
-            type="email"
-            id="email"
-            required
-            onChange={handleChange}
-          ></input>
-          <input
-            ref={passwordRef}
-            className={styles.input}
-            placeholder="Password"
-            type="password"
-            id="password"
-            required
-            onChange={handleChange}
-          ></input>
-          {error !== "" && <div className={styles.error}>{error}</div>}
-          <CandyButton
-            color="white"
-            colorLight="#00c486"
-            colorDark="#00c486"
-            onClick={handleSubmit}
-          >
-            <div style={{ margin: "0 1.25rem" }}>Login</div>
-          </CandyButton>
-          <div className={styles.signup}>
-            First time here?{" "}
-            <Link to="/signup" style={{ textDecoration: "none" }}>
-              Sign up
-            </Link>
+      {loading || currentUserLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <div className={styles.logoArea}>
+            <Logo />
           </div>
-        </div>
-      </div>
+          <div className={styles.middle}>
+            <div className={styles.inputsContainer}>
+              <input
+                ref={emailRef}
+                className={styles.input}
+                placeholder="Email"
+                type="email"
+                id="email"
+                required
+                onChange={handleChange}
+              ></input>
+              <input
+                ref={passwordRef}
+                className={styles.input}
+                placeholder="Password"
+                type="password"
+                id="password"
+                required
+                onChange={handleChange}
+              ></input>
+              {error !== "" && <div className={styles.error}>{error}</div>}
+              <CandyButton
+                color="white"
+                colorLight="#00c486"
+                colorDark="#00c486"
+                onClick={handleSubmit}
+              >
+                <div style={{ margin: "0 1.25rem" }}>Login</div>
+              </CandyButton>
+              <div className={styles.signup}>
+                First time here?{" "}
+                <Link to="/signup" style={{ textDecoration: "none" }}>
+                  Sign up
+                </Link>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

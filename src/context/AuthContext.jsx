@@ -10,6 +10,7 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [serverError, setServerError] = useState(null);
 
   async function signup(user) {
     setLoading(true);
@@ -45,6 +46,9 @@ const AuthProvider = ({ children }) => {
       setCurrentUser(response.data.user);
     } catch (error) {
       // handle error
+      if (error.response.data.suspended) {
+        setServerError(error.response.data);
+      }
       console.log(error);
     }
     setLoading(false);
@@ -97,6 +101,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     loading,
+    serverError,
     currentUser,
     setCurrentUser,
     signup,

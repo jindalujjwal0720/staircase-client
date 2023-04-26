@@ -10,17 +10,20 @@ import axios from "axios";
 import PrivateRoute from "./components/private-routes/PrivateRoute";
 import Signup from "./screens/login/Signup";
 import Loading from "./components/loading/Loading";
+import ServerErrorDialogbox from "./components/server-errors-dialogbox/ServerErrorDialogbox";
 axios.defaults.withCredentials = true;
 
 function App() {
-  const { loading } = useAuth();
-
-  useEffect(() => {
-    return () => {};
-  });
+  const { loading, serverError } = useAuth();
 
   return (
     <div>
+      {serverError && (
+        <ServerErrorDialogbox
+          message={serverError.message}
+          details={serverError.details}
+        />
+      )}
       {loading ? (
         <Loading />
       ) : (

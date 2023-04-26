@@ -24,6 +24,7 @@ import AchievementsDialogBox from "../../components/achievements-dialogbox/Achie
 import RewardDialogBox from "../../components/reward-dialogbox/RewardDialogBox";
 import HowToPlayDialogBox from "../../components/how-to-play-dialogbox/HowToPlayDialogBox";
 import ReferralsDialogbox from "../../components/referrals-dialogbox/ReferralsDialogbox";
+import ServerErrorDialogbox from "../../components/server-errors-dialogbox/ServerErrorDialogbox";
 
 const Home = () => {
   const { currentUser, updateCurrentUser } = useAuth();
