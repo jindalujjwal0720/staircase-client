@@ -30,6 +30,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    handleChange(e);
     if (error !== "") return;
     setLoading(true);
     try {
